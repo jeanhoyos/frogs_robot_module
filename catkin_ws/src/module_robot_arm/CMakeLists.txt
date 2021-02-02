@@ -3,14 +3,13 @@ project(module_robot_arm)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
-  skiros2_msgs
   frogs_msgs
 )
 
 catkin_python_setup()
 
 catkin_package(
- CATKIN_DEPENDS rospy skiros2_msgs frogs_msgs
+ CATKIN_DEPENDS rospy frogs_msgs
 )
 
 
@@ -24,7 +23,7 @@ catkin_package(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES frogs_monitoring
-   CATKIN_DEPENDS  rospy frogs_msgs skiros2_msgs
+   CATKIN_DEPENDS  rospy frogs_msgs
 #  DEPENDS system_lib
 )
 
