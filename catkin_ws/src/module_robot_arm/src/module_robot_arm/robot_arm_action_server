@@ -11,7 +11,7 @@ class ExampleActionServer(object):
   def __init__(self):
     # Init server
     rospy.init_node('test_action_server')
-    self.server = actionlib.SimpleActionServer('test_action_server', TestAction, execute_cb = self.execute, auto_start = False)
+    self.server = actionlib.SimpleActionServer('robot_action_server', TestAction, execute_cb = self.execute, auto_start = False)
     self.rate = rospy.Rate(10.0)
     self.feedback = TestFeedback()
     self.result = TestResult()
