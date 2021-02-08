@@ -135,7 +135,29 @@ catkin_make
 You should now see two new folders that are the result of the compilation: build, devel
 You have already added those two folder to the .gitignore file. 
 
-## Next
+## Run the module
+
+In order to run your module, source the setup.bash file
+
+```
+source devel/setup.bash
+```
+
+and run the application. In this example the module name and launch file are respectively:  module_robot_arm and robot_arm.launch 
+
+Therefore the module can be launch with the following command
+
+```
+roslaunch module_robot_arm robot_arm.launch
+```
+
+You should see the ROS1 node being launched correctly 
+
+
+## Modify the template to match your need
+
+
+## TODO: Clean
 
 
 in Frogs main repo 
