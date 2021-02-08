@@ -1,4 +1,102 @@
-# frogs_robot_arm
+
+## Start of configuration 
+
+This repository will be used as a template for external research partner modules. 
+
+Follow the following steps in order to configure your repository 
+
+
+- Download this current repository (zip) and extract it
+- Move the file the your preferred location. This will be your future location of the GIT repository
+- Rename the unzip folder with relevant name (e.g. frogs_module_gripper)
+
+At this stage, the module is ready to be linked to your preferred versioning platform. In this example, I will use Github.
+
+ Open a terminal and navigate inside your folder location.
+ Start a git repository 
+
+```
+git init
+```
+
+In order to avoid committing built packages (e.g. build, devel, ...), add a .gitignore file
+
+```
+touch .gitignore
+```
+
+Now you can modify this empty file
+
+```
+vim .gitignore
+```
+
+and copy-paste the following line 
+
+```
+catkin_ws/devel/
+catkin_ws/build/
+```
+
+You can add more lines to not include commit of hidden folder (e.g. .idea, .ros, ...)
+
+
+Add all the files from this folder
+
+```
+git add -A
+``` 
+
+Commit your files and give a commit comment
+
+```
+git commit -m "Initial commit"
+``` 
+
+Go to Github and log in to your account. Click the new repository button in the top-right. Don't add the option to include a README.md file as the template module already contain one.
+Click the “Create repository” button. Now, follow the second set of instructions, “Push an existing repository…”
+
+In my case, I need to introduce the following lines. DON'T COPY THOSE! Instead follow what your git is telling you.
+
+```
+git remote add origin git@github.com:jeanhoyos/frogs_gripper_module.git
+git branch -M main
+git push -u origin main
+```
+
+You need to have a ssh key configured on your computer and link it to your Github account.
+
+Check if you have a key on your computer.
+```
+ ls ~/.ssh/
+```
+
+If so, then copy the content of the key with the .pub extension.  If you don't have vim replace with gedit
+
+```
+vim ~/.ssh/***.pub       (replace *** with your file name)
+```
+
+In Github, navigate to your setting and go the ssh page. From there, click "New SSH key" and paste the content of the ***.pub file.
+Save it and it should now be properly configured. In order to configure your module as a submodule of the main repository, there will be a need to add an additional SSH key to your selected repository in order to be able to pull the latest changes. You can still control the access right for this (e.g. you can select only read access such that no push will be done on your repository) 
+
+If you have properly configured the repository, you should have received the following line after the git push command.
+```
+Branch main set up to track remote branch main from origin.
+```
+And you can see the folder content on the Github repository.
+
+
+
+
+
+
+
+
+
+
+
+## Start to use the module
 
 
 ```
@@ -36,10 +134,10 @@ git submodule add git@github.com:jeanhoyos/frogs_robot_module.git src/frogs_robo
 
 
 
+to update submodule
 
+first time
+not sure if needed git submodule update --init --recursive
 
-
-
-
-
-
+git pull --recurse-submodules
+git pull --recurse-submodules origin fm_devel
