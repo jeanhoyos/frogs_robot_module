@@ -199,37 +199,14 @@ by replacing pkg with your module name and type with your file name
 - Change the name of the launch file to match your module functionality 
 
 
+
+Now you can recompile using catkin_make inside the catkin_ws folder
+
+Finally you can run your new module with the following command
+
+```
+roslaunch new_module_name new_launch_file_new.launch
+```
  
 
 
-## TODO: Clean
-
-
-in Frogs main repo 
-
-
-But need access right
-
-
-ssh-keygen -t ed25519 -C "your_email@example
-
-eval "$(ssh-agent -s)"
-
-ssh-add ~/.ssh/id_ed25519
-
-vim ~/.ssh/id_ed25519.pub
-
-copy paste content in your repository
-
-need to add submodule:
-git submodule add git@github.com:jeanhoyos/frogs_robot_module.git src/frogs_robot_module
-
-
-
-to update submodule
-
-first time
-not sure if needed git submodule update --init --recursive
-
-git pull --recurse-submodules
-git pull --recurse-submodules origin fm_devel
