@@ -151,10 +151,55 @@ Therefore the module can be launch with the following command
 roslaunch module_robot_arm robot_arm.launch
 ```
 
-You should see the ROS1 node being launched correctly 
-
+You should see the ROS1 node being launched correctly. As the docker run command you used to launch the container contain a -v tag you can change the code from a IDE running on your computer. In addition you can directly change the folder name from the Files.
 
 ## Modify the template to match your need
+
+The first step is to adapt the module name ("module_robot_arm") to match your own module. There are 2 folders with this name that need to be changed
+In addition, change your python file name (robot_arm_action_server) to match your module functionality
+After having changed the module names and file name you need to update the CMakeLists.txt as well as the package.xml 
+
+In the CMakeLists.txt file:
+ 
+ - Change project(module_robot_arm) to your own project name
+ - Change the following line
+ 
+ ```
+catkin_install_python(PROGRAMS
+  src/module_robot_arm/robot_arm_action_server
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+```
+
+to 
+
+ ```
+catkin_install_python(PROGRAMS
+  src/module_**new_module_name**/**new_file_name**
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+```
+
+In the package.xml:
+- Change the following line to match your module name 
+```
+<name>module_robot_arm</name> 
+```
+
+The last step is to adapt the launch file. Go in the launch folder and open the launch file.
+
+- Change the following line
+
+```
+  <node pkg="module_robot_arm" type="robot_arm_action_server" name="as"/>
+```
+
+by replacing pkg with your module name and type with your file name
+
+- Change the name of the launch file to match your module functionality 
+
+
+ 
 
 
 ## TODO: Clean
