@@ -87,30 +87,55 @@ Branch main set up to track remote branch main from origin.
 And you can see the folder content on the Github repository.
 
 
-
-
-
-
-
-
-
-
-
 ## Start to use the module
 
+As explained, this module will run in a docker container. This will prevent compatibility issue and ensure a better modularity and reusability.
+In order to use docker, you first need to install it.
 
 ```
-docker build --tag=frogs_robot_arm .
+sudo apt install docker
 ```
 
+The next step is to build an Docker image that will be used at runtime. Such an image is the result of the building of a Dockerfile.
+Such file will give a proper definition of your running environment (installed packages, libraries, ROS version, ...) 
+If not the case, navigate to the location of the Dockerfile and build it with the following command. Change the --tag name to something module-specific 
+
 ```
-docker run --name="robot_arm" -it -v /home/jean/Documents/FROGS_ICON/frogs_robot_arm:/home/ros --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" frogs_robot_arm bash
+docker build --tag=*** .         (replace *** with relevent name. e.g. frogs_robot_arm)
 ```
 
+If it is the first time you build this file, it will be a long process. The next time you build it we be significantly faster. A tip is to remember that it is best to add line at the end as any unchanged line won't be recompiled.
+
+Now you can run a container with the following line. First change the *, **, *** with the following:
+- *: give a name for your container (e.g. gripper_module)
+- **: this is the path of the local folder. Replace with the result of 'pwd'
+- ***: replace with the tag name you have selected during the docker build command
+ 
+
+```
+docker run --name="*" -it -v *:/home/ros --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" *** bash
+```
+
+You should now be inside a container where ROS kinetic is configured. If you have properly configured the ** path, you should see the folder of your local repository (type 'ls' to check). 
+
+TODO: You can stop and start an container using the --name you have selected
+
+It is time to compile the ROS catkin folder. For this, navigate inside the catkin workspace
+
+```
 cd catkin_ws
+```
 
+and build using the catkin_make command
+
+```
 catkin_make 
+```
 
+You should now see two new folders that are the result of the compilation: build, devel
+You have already added those two folder to the .gitignore file. 
+
+## Next
 
 
 in Frogs main repo 
