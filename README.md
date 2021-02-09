@@ -113,7 +113,7 @@ Now you can run a container with the following line. First change the *, **, ***
  
 
 ```
-docker run --name="*" -it -v *:/home/ros --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" *** bash
+docker run --name="*" -it -v **:/home/ros --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" *** bash
 ```
 
 You should now be inside a container where ROS kinetic is configured. If you have properly configured the ** path, you should see the folder of your local repository (type 'ls' to check). 
