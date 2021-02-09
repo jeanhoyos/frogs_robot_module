@@ -1,2 +1,0 @@
-set(frogs_msgs_MESSAGE_FILES "/home/ros/catkin_ws/devel/share/frogs_msgs/msg/robot_armAction.msg;/home/ros/catkin_ws/devel/share/frogs_msgs/msg/robot_armActionGoal.msg;/home/ros/catkin_ws/devel/share/frogs_msgs/msg/robot_armActionResult.msg;/home/ros/catkin_ws/devel/share/frogs_msgs/msg/robot_armActionFeedback.msg;/home/ros/catkin_ws/devel/share/frogs_msgs/msg/robot_armGoal.msg;/home/ros/catkin_ws/devel/share/frogs_msgs/msg/robot_armResult.msg;/home/ros/catkin_ws/devel/share/frogs_msgs/msg/robot_armFeedback.msg")
-set(frogs_msgs_SERVICE_FILES "")

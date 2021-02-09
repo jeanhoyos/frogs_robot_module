@@ -1,8 +1,0 @@
-prefix=/home/ros/catkin_ws/devel
-
-Name: module_robot_arm
-Description: Description of module_robot_arm
-Version: 1.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: rospy frogs_msgs
