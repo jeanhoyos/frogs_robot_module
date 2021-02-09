@@ -26,7 +26,7 @@ class ExampleActionServer(object):
       self.feedback.feedback = self.counter
       self.server.publish_feedback(self.feedback)
       self.rate.sleep()
-      if self.counter > 40:
+      if self.counter > 25:
           self.result.result = self.counter
           self.server.set_succeeded(self.result)
           self.state = 'inactive'
