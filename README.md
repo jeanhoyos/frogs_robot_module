@@ -9,6 +9,7 @@ Follow the following steps in order to configure your repository
 - Download this current repository (zip) and extract it
 - Move the file the your preferred location. This will be your future location of the GIT repository
 - Rename the unzip folder with relevant name (e.g. frogs_module_gripper)
+- Rename frogs_msgs folder to your module name + _msgs (e.g. robot_module_msgs)
 
 At this stage, the module is ready to be linked to your preferred versioning platform. In this example, I will use Github.
 
@@ -197,6 +198,9 @@ The last step is to adapt the launch file. Go in the launch folder and open the 
 by replacing pkg with your module name and type with your file name
 
 - Change the name of the launch file to match your module functionality 
+
+
+Navigate to the message folder (e.g. robot_module_msgs) and adapt the CMakeLists.txt and package.xml to match your new folder name
 
 
 
