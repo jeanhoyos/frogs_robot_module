@@ -121,20 +121,6 @@ You should now be inside a container where ROS kinetic is configured. If you hav
 
 TODO: You can stop and start an container using the --name you have selected
 
-It is time to compile the ROS catkin folder. For this, navigate inside the catkin workspace
-
-```
-cd catkin_ws
-```
-
-and build using the catkin_make command
-
-```
-catkin_make 
-```
-
-You should now see two new folders that are the result of the compilation: build, devel
-You have already added those two folder to the .gitignore file. 
 
 ## Run the module
 
@@ -202,9 +188,20 @@ by replacing pkg with your module name and type with your file name
 
 Navigate to the message folder (e.g. robot_module_msgs) and adapt the CMakeLists.txt and package.xml to match your new folder name
 
+It is time to compile the ROS catkin folder. For this, navigate inside the catkin workspace
 
+```
+cd catkin_ws
+```
 
-Now you can recompile using catkin_make inside the catkin_ws folder
+and build using the catkin_make command
+
+```
+catkin_make 
+```
+
+You should now see two new folders that are the result of the compilation: build, devel
+You have already added those two folder to the .gitignore file. 
 
 Finally you can run your new module with the following command
 
