@@ -122,23 +122,6 @@ You should now be inside a container where ROS kinetic is configured. If you hav
 TODO: You can stop and start an container using the --name you have selected
 
 
-## Run the module
-
-In order to run your module, source the setup.bash file
-
-```
-source devel/setup.bash
-```
-
-and run the application. In this example the module name and launch file are respectively:  module_robot_arm and robot_arm.launch 
-
-Therefore the module can be launch with the following command
-
-```
-roslaunch module_robot_arm robot_arm.launch
-```
-
-You should see the ROS1 node being launched correctly. As the docker run command you used to launch the container contain a -v tag you can change the code from a IDE running on your computer. In addition you can directly change the folder name from the Files.
 
 ## Modify the template to match your need
 
@@ -167,11 +150,20 @@ catkin_install_python(PROGRAMS
 )
 ```
 
+In addition you need to change the frogs_msgs statement to the one you selected for your _msgs folder
+
 In the package.xml:
 - Change the following line to match your module name 
 ```
 <name>module_robot_arm</name> 
 ```
+
+
+In addition you need to change the frogs_msgs statement to the one you selected for your _msgs folder
+
+
+
+
 
 The last step is to adapt the launch file. Go in the launch folder and open the launch file.
 
@@ -188,6 +180,8 @@ by replacing pkg with your module name and type with your file name
 
 Navigate to the message folder (e.g. robot_module_msgs) and adapt the CMakeLists.txt and package.xml to match your new folder name
 
+
+
 It is time to compile the ROS catkin folder. For this, navigate inside the catkin workspace
 
 ```
@@ -200,6 +194,15 @@ and build using the catkin_make command
 catkin_make 
 ```
 
+ 
+ ## Run the module
+
+In order to run your module, source the setup.bash file
+
+```
+source devel/setup.bash
+```
+
 You should now see two new folders that are the result of the compilation: build, devel
 You have already added those two folder to the .gitignore file. 
 
@@ -209,5 +212,8 @@ Finally you can run your new module with the following command
 roslaunch new_module_name new_launch_file_new.launch
 ```
  
+You should see the ROS1 node being launched correctly. As the docker run command you used to launch the container contain a -v tag you can change the code from a IDE running on your computer. In addition you can directly change the folder name from the Files.
+
+
 
 
