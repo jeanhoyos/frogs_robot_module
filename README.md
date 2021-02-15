@@ -150,7 +150,7 @@ In the package.xml:
 
 In addition you also need to change the 'frogs_msgs' statement.
 
-
+Next you need to change the setup.py to update the module name
 
 The next step is to adapt the launch file. Go in the launch folder and open the launch file.
 
@@ -229,4 +229,34 @@ You need to adapt the code in order to match the code of the server node.
 http://wiki.ros.org/actionlib_tutorials/Tutorials/Writing%20a%20Simple%20Action%20Client%20%28Python%29
 
 Once you have built your new ROS package. Run the server node in a first terminal then in a second terminal, run the client that will be responsible for sending the ROS action goal.
+
+## How to hide the source code (if needed)
+
+You can avoid pushing your source folder in Github/Gitlab using an additional build that will generate the install folder that can be imported.
+
+- Adapt your .gitignore file in order to not push src/ in order to hide the source code
+
+The .gitignore file ensures that files not tracked by Git remain untracked.
+
+Just adding folders/files to a .gitignore file will not untrack them -- they will remain tracked by Git.
+
+To untrack files, it is necessary to remove from the repository the tracked files listed in .gitignore file. Then re-add them and commit your changes.
+
+The easiest, most thorough way to do this is to remove and cache all files in the repository, then add them all back. All folders/files listed in .gitignore file will not be tracked. From the top folder in the repository run the following commands:
+
+```
+git rm -r --cached .
+git add .
+```
+
+Now your git status should not be affected by the files mentioned in the .gitignore
+
+- Build your package. The second line will create an additional folder that can be push on git.
+```
+catkin_make
+catkin_make install
+```
+
+Now you can push your changes. After a git status you should see that only the /install folder can be commit.
+
 
