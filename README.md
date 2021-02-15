@@ -3,46 +3,37 @@
 
 This repository will be used as a template for external research partner modules. 
 
-Follow the following steps in order to configure your repository 
-
+Follow the following steps in order to configure your repository. (Alternative: you can git pull the repository and manually remove the .git file)
 
 - Download this current repository (zip) and extract it
 - Move the file the your preferred location. This will be your future location of the GIT repository
+
+Rename the folders
+
 - Rename the unzip folder with relevant name (e.g. frogs_module_gripper)
-- Rename frogs_msgs folder to your module name + _msgs (e.g. robot_module_msgs)
+- Navigate inside catkin_ws/src, rename the 'module_robot_arm' folder to match your module.
+- Navigate inside catkin_ws/src/new_name/src and rename the folder and the python file inside it.
+- Rename robot_module_msgs folder to match your module name + _msgs (e.g. gripper_module_msgs)
 
 At this stage, the module is ready to be linked to your preferred versioning platform. In this example, I will use Github.
 
- Open a terminal and navigate inside your folder location.
+ Open a terminal and navigate inside your main folder location.
  Start a git repository 
 
 ```
 git init
 ```
 
-In order to avoid committing built packages (e.g. build, devel, ...), add a .gitignore file
-
-```
-touch .gitignore
-```
-
-Now you can modify this empty file
+In order to avoid committing built packages (e.g. build, devel, ...), a .gitignore file is already available
+You can see the content with the following line (you can replace vim with cat or gedit if you don't have it installed)
 
 ```
 vim .gitignore
 ```
 
-and copy-paste the following line 
+You can add more lines to not include commit of hidden folder
 
-```
-catkin_ws/devel/
-catkin_ws/build/
-```
-
-You can add more lines to not include commit of hidden folder (e.g. .idea, .ros, ...)
-
-
-Add all the files from this folder
+Add all the files from this folder for pushing to your git repository
 
 ```
 git add -A
@@ -54,7 +45,7 @@ Commit your files and give a commit comment
 git commit -m "Initial commit"
 ``` 
 
-Go to Github and log in to your account. Click the new repository button in the top-right. Don't add the option to include a README.md file as the template module already contain one.
+Go to Github/Gitlab and log in to your account. Click the new repository button in the top-right. Don't add the option to include a README.md file as the template module already contain one.
 Click the “Create repository” button. Now, follow the second set of instructions, “Push an existing repository…”
 
 In my case, I need to introduce the following lines. DON'T COPY THOSE! Instead follow what your git is telling you.
@@ -85,7 +76,7 @@ If you have properly configured the repository, you should have received the fol
 ```
 Branch main set up to track remote branch main from origin.
 ```
-And you can see the folder content on the Github repository.
+And you can see the folder content on the Github repository after refreshing the page.
 
 
 ## Start to use the module
@@ -97,7 +88,7 @@ In order to use docker, you first need to install it.
 sudo apt install docker
 ```
 
-The next step is to build an Docker image that will be used at runtime. Such an image is the result of the building of a Dockerfile.
+The next step is to build an Docker image that will be used at runtime. Such an image is the result of the build of a Dockerfile.
 Such file will give a proper definition of your running environment (installed packages, libraries, ROS version, ...) 
 If not the case, navigate to the location of the Dockerfile and build it with the following command. Change the --tag name to something module-specific 
 
@@ -114,20 +105,19 @@ Now you can run a container with the following line. First change the *, **, ***
  
 
 ```
-docker run --name="*" -it -v **:/home/ros --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" *** bash
+docker run -it -v **:/home/ros --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" *** bash
 ```
 
 You should now be inside a container where ROS kinetic is configured. If you have properly configured the ** path, you should see the folder of your local repository (type 'ls' to check). 
 
-TODO: You can stop and start an container using the --name you have selected
+Additionally you can add a --name tag in order to give a name to your container. You can stop and start an container using the --name you have selected
 
 
 
 ## Modify the template to match your need
 
-The first step is to adapt the module name ("module_robot_arm") to match your own module. There are 2 folders with this name that need to be changed
-In addition, change your python file name (robot_arm_action_server) to match your module functionality
 After having changed the module names and file name you need to update the CMakeLists.txt as well as the package.xml 
+Navigate inside your renamed module folder and open the CMakeLists.txt
 
 In the CMakeLists.txt file:
  
@@ -150,7 +140,7 @@ catkin_install_python(PROGRAMS
 )
 ```
 
-In addition you need to change the frogs_msgs statement to the one you selected for your _msgs folder
+In addition you need to change the 'frogs_msgs' statement to the one you selected for your _msgs folder
 
 In the package.xml:
 - Change the following line to match your module name 
@@ -158,14 +148,11 @@ In the package.xml:
 <name>module_robot_arm</name> 
 ```
 
-
-In addition you need to change the frogs_msgs statement to the one you selected for your _msgs folder
-
+In addition you also need to change the 'frogs_msgs' statement.
 
 
 
-
-The last step is to adapt the launch file. Go in the launch folder and open the launch file.
+The next step is to adapt the launch file. Go in the launch folder and open the launch file.
 
 - Change the following line
 
@@ -173,22 +160,21 @@ The last step is to adapt the launch file. Go in the launch folder and open the 
   <node pkg="module_robot_arm" type="robot_arm_action_server" name="as"/>
 ```
 
-by replacing pkg with your module name and type with your file name
+by replacing pkg with your module name and type with your file name. In addition, replace the name to be more specific for your module
 
 - Change the name of the launch file to match your module functionality 
 
 
-Navigate to the message folder (e.g. robot_module_msgs) and adapt the CMakeLists.txt and package.xml to match your new folder name
+Navigate to the message folder (e.g. robot_module_msgs) and adapt the CMakeLists.txt and package.xml to match your new folder name (project). In addition, you can change the name of the ROS action template which is located in the action folder. If you do this change then adapt the CMakelists to match you new name.
 
 
-
-It is time to compile the ROS catkin folder. For this, navigate inside the catkin workspace
+It is time to compile the ROS catkin folder. For this, navigate inside the catkin workspace (INSIDE YOUR CONTAINER)
 
 ```
 cd catkin_ws
 ```
 
-and build using the catkin_make command
+and build the ROS project using the catkin_make command
 
 ```
 catkin_make 
@@ -215,5 +201,32 @@ roslaunch new_module_name new_launch_file_new.launch
 You should see the ROS1 node being launched correctly. As the docker run command you used to launch the container contain a -v tag you can change the code from a IDE running on your computer. In addition you can directly change the folder name from the Files.
 
 
+Once your node is launched you can interact with your container using the following command. 
 
+```
+docker exec -it *** bash
+```
+*** is the name of your running container (this is your name tag if you used it)
+
+You should be inside your container. Source ROS and your built package if needed
+
+```
+source /opt/ros/kinetic/setup.bash
+source devel/setup.bash
+```
+
+You can now run rostopic list command to see if everything is running as expected.
+
+
+## Interact with this module
+
+The running module is a server that will wait for ROS action goal in order to execute its application. The client will be SKIROS if the complete architecture.
+However, you might want to test triggering a ROS action goal on your own computer. 
+
+The following link is a tutorial for writing a ROS action request from a client node. You can create a second folder to simulate the ProductionS framework.
+You need to adapt the code in order to match the code of the server node. 
+
+http://wiki.ros.org/actionlib_tutorials/Tutorials/Writing%20a%20Simple%20Action%20Client%20%28Python%29
+
+Once you have built your new ROS package. Run the server node in a first terminal then in a second terminal, run the client that will be responsible for sending the ROS action goal.
 

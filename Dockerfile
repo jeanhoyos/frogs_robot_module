@@ -1,5 +1,4 @@
-# s is an auto generated Dockerfile for ros:desktop-full
-# generated from docker_images/create_ros_image.Dockerfile.em
+# use official ros kinetic image
 FROM osrf/ros:kinetic-desktop-xenial
 
 # install ros packages
@@ -14,12 +13,10 @@ RUN apt update && apt -y install vim && \
         apt -y install net-tools && \
         apt-get -y install python-rdflib wget xterm
 
-
-RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-
-RUN python get-pip.py
-RUN pip install wrapt inflection
-#RUN pip install Cython
+# for pip (if needed)
+#RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+#RUN python get-pip.py
+#RUN pip install wrapt inflection
 
 # Define a user to execute the script
 ARG UNAME=ros
@@ -31,9 +28,7 @@ RUN useradd -m -u $UID -g $GID -s /bin/bash $UNAME
 RUN echo "$UNAME:ros" | chpasswd && adduser $UNAME sudo
 USER $UNAME
 
-#COPY ./sudoers /etc/sudoers
-
-# This will the working directory of the ocntainer
+# This will the working directory of the container
 WORKDIR /home/ros/
 
 EXPOSE 11011-11310 
