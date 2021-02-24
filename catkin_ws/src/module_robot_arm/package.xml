@@ -13,8 +13,8 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>rospy</build_depend>
-  <build_depend>frogs_msgs</build_depend>
+  <build_depend>robot_module_msgs</build_depend>
   <run_depend>rospy</run_depend>
-  <run_depend>frogs_msgs</run_depend>
+  <run_depend>robot_module_msgs</run_depend>
 
 </package>
